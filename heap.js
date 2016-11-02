@@ -35,8 +35,7 @@ Heap.prototype.insert = function(value) {
   var that = this;
 
   // Recursive function to handle swaps, input index
-  var reheapify = function(index) {
-
+  var reheapify = function(index) { //being called in the setTimeout function
     // Get parent index
     var parentInd = Math.ceil(index/2-1);
     // Base Case : value < parent or parent is null
@@ -53,7 +52,7 @@ Heap.prototype.insert = function(value) {
 
     setTimeout(function(){
       return reheapify(parentInd);
-    }, stepDelay);
+    }, stepDelay); // recursive start
   };
   setTimeout(function() {
     return reheapify(that.storage.length-1);

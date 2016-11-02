@@ -1,4 +1,4 @@
-/* 
+/*
 * @Author: kuychaco
 * @Date:   2015-07-12 12:34:43
 * @Last Modified by:   kuychaco
@@ -8,8 +8,8 @@
 'use strict';
 
 // D3 code for tree visualization
-var width = 960,
-    height = 800;
+var width = 360,
+    height = 400;
 
 var tree = d3.layout.tree()
     .size([width - 100, height - 100]);
@@ -55,7 +55,7 @@ var restoreInitial = function() {
 
 // Update the array of nodes for the d3 tree layout based on adding nodes during Heap methods
 var insertNode = function(value) {
-  
+
   if (nodes[0].value === undefined) {
     // If first value is added to heap, modify root node
     nodes[0].value = value;
@@ -233,7 +233,7 @@ var swapRoot = function() {
   newRoot.parent = newRoot;
   newRoot.px = newRoot.x;
   newRoot.py = newRoot.y;
-  
+
   // Animate
   animateSwap();
 };
@@ -247,7 +247,7 @@ var animateSwap = function() {
 
   // Recompute links between nodes post swapping
   link = link.data(tree.links(nodes), function(d) { return d.source.id + "-" + d.target.id; });
-  
+
   // Add entering links
   link.enter().insert("path", ".node")
       .attr("class", "link")
@@ -255,7 +255,7 @@ var animateSwap = function() {
         var o = {x: d.source.px, y: d.source.py};
         return diagonal({source: o, target: o});
       });
-  
+
   // Remove exit links
   link.exit().remove();
 
