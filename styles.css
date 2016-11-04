@@ -1,14 +1,11 @@
-/*
-* @Author: Katrina Uychaco
-* @Date:   2015-07-06 15:23:28
-* @Last Modified by:   Katrina Uychaco
-* @Last Modified time: 2015-07-06 15:23:36
-*/
 
+body{
+  background-color: beige;
+}
 
 .node circle {
   fill: #fff;
-  stroke: steelblue;
+  stroke: black;
   stroke-width: 3px;
 }
 
@@ -16,6 +13,6 @@
 
 .link {
   fill: none;
-  stroke: #ccc;
+  stroke: black;
   stroke-width: 2px;
 }
