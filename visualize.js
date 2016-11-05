@@ -8,8 +8,8 @@
 'use strict';
 
 // D3 code for tree visualization
-var width = 360,
-    height = 400;
+var width = 420,
+    height = 500;
 
 var tree = d3.layout.tree()
     .size([width - 100, height - 100]);
