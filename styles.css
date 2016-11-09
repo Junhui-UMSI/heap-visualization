@@ -18,3 +18,9 @@ body{
   stroke: black;
   stroke-width: 2px;
 }
+.nondisplay{
+  display: none;
+}
+.display{
+  visibility:visible;
+}

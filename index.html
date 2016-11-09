@@ -8,8 +8,14 @@
 
   <body>
     <h1>SI 649 Junhui's assignment</h1>
-    <div>
-      <h2>Defintion</h2>      
+    <div class="definition">
+      <h2>Defintion</h2>
+      <div>
+      <button onclick="displaymaxheap()">Maxheap</button>
+      <button onclick="displayminheap()">Minheap</button>
+      </div>
+      <div class="definition1 col-xs-6"></div>
+      <div class="definition2 col-xs-6"></div>
     </div>
     <h3>Options for implementing the heap</h3>
 
@@ -28,13 +34,215 @@
     <div class='main'>
     </div>
     <script src='d3.min.js'></script>
-    <!-- <script src="https://d3js.org/d3.v3.min.js"></script> maybe using online script -->
+    <script>
+      var MaxtreeData = [
+          {
+            "name": "A",
+            "parent": "null",
+            "value": 5,
+            "type": "black",
+            "level": "red",
+            "children": [
+              {
+                "name": "B",
+                "parent": "Top Level",
+                "value": 4,
+                "type": "grey",
+                "level": "red",
+                "children": [
+                  {
+                    "name": "D",
+                    "parent": "Level 2: A",
+                    "value": 1,
+                    "type": "steelblue",
+                    "level": "orange"
+                  },
+                  {
+                    "name": "E",
+                    "parent": "Level 2: A",
+                    "value": 2,
+                    "type": "steelblue",
+                    "level": "red"
+                  }
+                ]
+              },
+              {
+                "name": "C",
+                "parent": "Top Level",
+                "value": 3,
+                "type": "grey",
+                "level": "green"
+              }
+            ]
+          }
+        ];
+      var MintreeData = [
+          {
+            "name": "A",
+            "parent": "null",
+            "value": 1,
+            "type": "black",
+            "level": "red",
+            "children": [
+              {
+                "name": "B",
+                "parent": "Top Level",
+                "value": 3,
+                "type": "grey",
+                "level": "red",
+                "children": [
+                  {
+                    "name": "D",
+                    "parent": "Level 2: A",
+                    "value": 5,
+                    "type": "steelblue",
+                    "level": "orange"
+                  },
+                  {
+                    "name": "E",
+                    "parent": "Level 2: A",
+                    "value": 4,
+                    "type": "steelblue",
+                    "level": "red"
+                  }
+                ]
+              },
+              {
+                "name": "C",
+                "parent": "Top Level",
+                "value": 2,
+                "type": "grey",
+                "level": "green"
+              }
+            ]
+          }
+        ];
+      var margin = {top: 120, right: 120, bottom: 20, left: 120},
+        	width = 700 - margin.right - margin.left,
+        	height = 500 - margin.top - margin.bottom;
+
+      var i = 0;
+
+      var tree = d3.layout.tree()
+      	.size([height, width]);
+
+      var diagonal = d3.svg.diagonal()
+      	.projection(function(d) { return [d.x, d.y]; });
+
+      var svg1 = d3.select(".definition1").append("svg")
+      	.attr("width", width + margin.right + margin.left)
+      	.attr("height", height + margin.top + margin.bottom)
+        .attr("id","maxheap")
+        .append("g")
+      	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+      var svg2 = d3.select(".definition2").append("svg")
+        .attr("width", width + margin.right + margin.left)
+        .attr("height", height + margin.top + margin.bottom)
+        .attr("id","maxheap")
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+      updateMaxheap(MaxtreeData[0]);
+      updateMinheap(MintreeData[0]);
+      function displaymaxheap(){
+
+      };
+      function displayminheap(){
+
+      }
+      function updateMaxheap(source) {
+
+        // Compute the new tree layout.
+        var nodes = tree.nodes(source),
+      	  links = tree.links(nodes);
+
+        // Normalize for fixed-depth.
+        nodes.forEach(function(d) { d.y = d.depth * 100; });
+
+        // Declare the nodes…
+        var node = svg1.selectAll("g.node")
+      	  .data(nodes, function(d) { return d.id || (d.id = ++i); });
+
+        // Enter the nodes.
+        var nodeEnter = node.enter().append("g")
+         .attr("class", "node")
+         .attr("transform", function(d) {
+          return "translate(" + d.x + "," + d.y + ")"; });
+
+        nodeEnter.append("circle")
+      	  .attr("r", function(d){ return d.value*10})
+      	  .style("stroke", "black")
+      	  .style("fill", "white");
+
+        nodeEnter.append("text")
+      	  .attr("y", function(d) {
+      		  return d.children || d.children; })
+      	  .attr("dy", ".35em")
+      	  .attr("text-anchor", "middle")
+      	  .text(function(d) { return d.name; })
+      	  .style("fill-opacity", 1)
+          .style("font-size","20px");
+
+        // Declare the links…
+        var link = svg1.selectAll("path.link")
+      	  .data(links, function(d) { return d.target.id; });
+
+        // Enter the links.
+        link.enter().insert("path", "g")
+      	  .attr("class", "link")
+        	  .style("stroke", "black")
+      	  .attr("d", diagonal);
+
+      }
+
+      function updateMinheap(source) {
+
+        // Compute the new tree layout.
+        var nodes = tree.nodes(source),
+      	  links = tree.links(nodes);
+
+        // Normalize for fixed-depth.
+        nodes.forEach(function(d) { d.y = d.depth * 100; });
+
+        // Declare the nodes…
+        var node = svg2.selectAll("g.node")
+      	  .data(nodes, function(d) { return d.id || (d.id = ++i); });
+
+        // Enter the nodes.
+        var nodeEnter = node.enter().append("g")
+         .attr("class", "node")
+         .attr("transform", function(d) {
+          return "translate(" + d.x + "," + d.y + ")"; });
+
+        nodeEnter.append("circle")
+      	  .attr("r", function(d){return d.value*10})
+      	  .style("stroke", "black")
+      	  .style("fill", "while");
+
+        nodeEnter.append("text")
+      	  .attr("y", function(d) {
+      		  return d.children || d.children; })
+      	  .attr("dy", ".35em")
+      	  .attr("text-anchor", "middle")
+      	  .text(function(d) { return d.name; })
+      	  .style("fill-opacity", 1)
+          .style("font-size","20px");
+
+        // Declare the links…
+        var link = svg2.selectAll("path.link")
+      	  .data(links, function(d) { return d.target.id; });
+
+        // Enter the links.
+        link.enter().insert("path", "g")
+      	  .attr("class", "link")
+        	  .style("stroke", "black")
+      	  .attr("d", diagonal);
+
+      }
+
+    </script>
     <script src='heap.js'></script>
     <script src='visualize.js'></script>
-    <script>
-    function validationform(){
-
-    }
-    </script>
   </body>
 </html>
