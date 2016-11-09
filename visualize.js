@@ -1,14 +1,8 @@
-/*
-* @Author: kuychaco
-* @Date:   2015-07-12 12:34:43
-* @Last Modified by:   kuychaco
-* @Last Modified time: 2015-07-12 12:53:22
-*/
 
 'use strict';
 
 // D3 code for tree visualization
-var width = 420,
+var width = 1500,
     height = 500;
 
 var tree = d3.layout.tree()
@@ -23,7 +17,7 @@ root.py = root.y;
 
 var diagonal = d3.svg.diagonal();
 
-var svg = d3.select("body").append("svg")
+var svg = d3.select(".main").append("svg")
     .attr("width", width)
     .attr("height", height)
   .append("g")
@@ -55,15 +49,17 @@ var restoreInitial = function() {
 
 // Update the array of nodes for the d3 tree layout based on adding nodes during Heap methods
 var insertNode = function(value) {
-
+  var currentid;
   if (nodes[0].value === undefined) {
     // If first value is added to heap, modify root node
     nodes[0].value = value;
     nodes[0].id = 0;
+    currentid = 0;
   } else {
     // Add a new node to its parent in the heap.
     var n = {id: nodes.length, value: value},
         p = nodes[Math.ceil((nodes.length-2)/2)];
+    currentid = n.id;
     if (p.children) p.children.push(n); else p.children = [n];
     nodes.push(n);
   }
@@ -107,6 +103,9 @@ var insertNode = function(value) {
 
   t.selectAll("circle")
       .attr("cx", function(d) { return d.px = d.x; })
+      .attr("class", function(d){ if(d.id === currentid){
+          return "currentinput";}}
+      )
       .attr("cy", function(d) { return d.py = d.y; });
 
   t.selectAll("text")

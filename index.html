@@ -8,8 +8,11 @@
 
   <body>
     <h1>SI 649 Junhui's assignment</h1>
-    <h2>Defintion</h2>
-    <div width="400px" height="500px"></div>
+    <div>
+      <h2>Defintion</h2>      
+    </div>
+    <h3>Options for implementing the heap</h3>
+
     <form onsubmit='heap.insert(); return false;'>
       <input id='inputVal' type='text' placeHolder='number'/>
       <input type='submit' value='Insert'>
@@ -21,11 +24,17 @@
     </form>
     <br/>
     <button id='remove' onclick='heap.removeMax()'>Remove Max</button>
+    <button id='remove' onclick='heap.removeMin()'>Remove Min</button>
     <div class='main'>
     </div>
     <script src='d3.min.js'></script>
     <!-- <script src="https://d3js.org/d3.v3.min.js"></script> maybe using online script -->
     <script src='heap.js'></script>
     <script src='visualize.js'></script>
+    <script>
+    function validationform(){
+
+    }
+    </script>
   </body>
 </html>

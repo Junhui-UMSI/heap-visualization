@@ -1,11 +1,9 @@
 // Heap visualization
-// Authors: Katrina Uychaco && Kalev Roomann-Kurrik
-// Last Modified: Thursday July 9, 2015
 
 'use strict';
 
 // Set animation delay time
-var stepDelay = 300;
+var stepDelay = 600;
 var setDelay = function() {
   stepDelay = parseInt(document.getElementById('delayTime').value);
   document.getElementById('delayTime').value = '';
