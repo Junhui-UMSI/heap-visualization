@@ -7,32 +7,41 @@
   </head>
 
   <body>
-    <h1>SI 649 Junhui's assignment</h1>
     <div class="definition">
-      <h2>Defintion</h2>
-      <div>
-      <button onclick="displaymaxheap()">Maxheap</button>
-      <button onclick="displayminheap()">Minheap</button>
+      <h1>SI 649 Junhui's assignment: Heap Visualization</h1>
+      <h2>Heap Defintion</h2>
+      <p> a tree data structure where each node in the tree has a value smaller than all of its children. Its a fantastically useful data structure, that can be used to efficiently solve this problem. By comparing each item with the root element of an appropriately sized min-heap, and pushing onto the heap when its bigger - it picks out the just the largest items:</p>
+      <div class="definition1 col-xs-6">
+        <h2>Max Heap</h2>
       </div>
-      <div class="definition1 col-xs-6"></div>
-      <div class="definition2 col-xs-6"></div>
+      <div class="definition2 col-xs-6">
+        <h2>Min Heap</h2>
+      </div>
     </div>
-    <h3>Options for implementing the heap</h3>
+    <div class="controller">
 
-    <form onsubmit='heap.insert(); return false;'>
-      <input id='inputVal' type='text' placeHolder='number'/>
-      <input type='submit' value='Insert'>
-    </form>
-    <br/>
-    <form onsubmit='setDelay(); return false;'>
-      <input id='delayTime' type='text' placeHolder='milliseconds'/>
-      <input type='submit' value='Set Delay Time'>
-    </form>
-    <br/>
-    <button id='remove' onclick='heap.removeMax()'>Remove Max</button>
-    <button id='remove' onclick='heap.removeMin()'>Remove Min</button>
-    <div class='main'>
-    </div>
+      <div class="options col-xs-4">
+        <h2>Controller Panel</h2>
+
+        <form name="numberinput" onsubmit='heap.insert(); return false;'>
+          <input id='inputVal' type='text' placeHolder='number'/>
+          <input type='submit' value='Insert'>
+        </form>
+        <br/>
+        <form onsubmit='setDelay(); return false;'>
+          <input id='delayTime' type='text' placeHolder='milliseconds'/>
+          <input type='submit' value='Set Delay Time'>
+        </form>
+        <br/>
+        <button id='remove' onclick='heap.removeMax()'>Remove Max</button>
+        <button id='remove' onclick='heap.removeMin()'>Remove Min</button>
+      </div>
+
+      <div class="main col-xs-8">
+        <h2>How to construct the heap</h2>
+
+      </div>
+  </div>
     <script src='d3.min.js'></script>
     <script>
       var MaxtreeData = [
@@ -145,12 +154,7 @@
 
       updateMaxheap(MaxtreeData[0]);
       updateMinheap(MintreeData[0]);
-      function displaymaxheap(){
 
-      };
-      function displayminheap(){
-
-      }
       function updateMaxheap(source) {
 
         // Compute the new tree layout.

@@ -2,8 +2,8 @@
 'use strict';
 
 // D3 code for tree visualization
-var width = 1500,
-    height = 500;
+var width = 1000,
+    height = 800;
 
 var tree = d3.layout.tree()
     .size([width - 100, height - 100]);
@@ -20,6 +20,7 @@ var diagonal = d3.svg.diagonal();
 var svg = d3.select(".main").append("svg")
     .attr("width", width)
     .attr("height", height)
+    .attr("class", "heapbox")
   .append("g")
     .attr("transform", "translate(10,30)");
 

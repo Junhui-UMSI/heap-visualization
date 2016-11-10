@@ -2,7 +2,24 @@
 body{
   background-color: beige;
 }
-
+.definition{
+  text-align: center;
+  margin:0 auto;
+  width:80%;
+}
+.options{
+  margin:0 auto;
+  text-align: center;
+}
+.main{
+  margin:0 auto;
+  text-align: center;
+}
+.controller{
+  text-align: center;
+  margin:0 auto;
+  width: 80%;
+}
 .node circle {
   fill: #fff;
   stroke: black;
@@ -23,4 +40,7 @@ body{
 }
 .display{
   visibility:visible;
+}
+.heapbox{
+  border: 1px solid;
 }
