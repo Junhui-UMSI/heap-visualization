@@ -3,7 +3,6 @@ body{
   background-color: beige;
 }
 .definition{
-  text-align: center;
   margin:0 auto;
   width:80%;
 }
@@ -27,6 +26,9 @@ body{
 }
 .node .currentinput{
   fill: red;
+}
+.node .comparenode{
+  fill: green;
 }
 .node text { font: 12px sans-serif; }
 

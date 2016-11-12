@@ -10,25 +10,26 @@
     <div class="definition">
       <h1>SI 649 Junhui's assignment: Heap Visualization</h1>
       <h2>Heap Defintion</h2>
-      <p> a tree data structure where each node in the tree has a value smaller than all of its children. Its a fantastically useful data structure, that can be used to efficiently solve this problem. By comparing each item with the root element of an appropriately sized min-heap, and pushing onto the heap when its bigger - it picks out the just the largest items:</p>
+      <p style="font-size: 20px;">In computer science, a heap is a specialized tree-based data structure that satisfies the heap property: If A is a parent node of B then the key (the value) of node A is ordered with respect to the key of node B with the same ordering applying across the heap. A heap can be classified further as either a "max heap" or a "min heap". In a max heap, the keys of parent nodes are always greater than or equal to those of the children and the highest key is in the root node. In a min heap, the keys of parent nodes are less than or equal to those of the children and the lowest key is in the root node.
+The heap is one maximally efficient implementation of an abstract data type called a priority queue, and in fact priority queues are often referred to as "heaps", regardless of how they may be implemented. A common implementation of a heap is the binary heap, in which the tree is a complete binary tree (see figure). The heap data structure, specifically the binary heap, was introduced by J. W. J. Williams in 1964, as a data structure for the heapsort sorting algorithm.[1] Heaps are also crucial in several efficient graph algorithms such as Dijkstra's algorithm.
+In a heap, the highest (or lowest) priority element is always stored at the root. A heap is not a sorted structure and can be regarded as partially ordered. As visible from the heap-diagram, there is no particular relationship among nodes on any given level, even among the siblings. When a heap is a complete binary tree, it has a smallest possible height—a heap with N nodes always has log N height. A heap is a useful data structure when you need to remove the object with the highest (or lowest) priority.
+Note that, as shown in the graphic, there is no implied ordering between siblings or cousins and no implied sequence for an in-order traversal (as there would be in, e.g., a binary search tree). The heap relation mentioned above applies only between nodes and their parents, grandparents, etc. The maximum number of children each node can have depends on the type of heap, but in many types it is at most two, which is known as a binary heap.
+A heap data structure should not be confused with the heap which is a common name for the pool of memory from which dynamically allocated memory is allocated. The term was originally used only for the data structure.</p>
+      </br><p style="font-size: 20px;">The good Point of Heap in one sentence: Since the element in heap is ordered by value in the sequence of parent-child nodes, it is often used in sorting and searching for the maximum or minimum value.</p>
       <div class="definition1 col-xs-6">
         <h2>Max Heap</h2>
+        <p style="font-size: 20px;">By definition, the value of parent nodes should be larger or equal to its children nodes in the max heap.</p>
       </div>
       <div class="definition2 col-xs-6">
         <h2>Min Heap</h2>
+        <p style="font-size: 20px;">By definition, the value of parent nodes should be smaller or equal to its children nodes in the min heap.</p>
       </div>
     </div>
-    <div class="time col-xs-8">
-      <form>
-        10<input type="range" id="range" min="0", max="100" value="50" oninput="getvalue()" style="width: 50%; margin: 0 auto;"><span>100</span>
-      </form>
-    </div>
+
     <div class="controller">
 
       <div class="options col-xs-4">
         <h2>Controller Panel</h2>
-        <button onclick="stop()">Stop</button>
-        <button onclick="resume()">Resume</button>
         <form name="numberinput" onsubmit='heap.insert(); return false;'>
           <input id='inputVal' type='text' placeHolder='number'/>
           <input type='submit' value='Insert'>
@@ -39,7 +40,13 @@
           <input type='submit' value='Set Delay Time'>
         </form>
         <br/>
+        <button onclick="stop()">Stop</button>
+        <button onclick="resume()">Resume</button>
         <button id='remove' onclick='heap.removeMax()'>Remove Max</button>
+        <p>Some Color encoding Hint:
+          The inserted element will first go down to the very lower level, and then compare its value with its parent node to see if there is a need for a switch.
+          If the element is indeed larger than its parent, it will swap the position of the element and its parent, the node will be encoded green in order to tell user this element is successfully changing the position because its value is bigger.
+          </p>
       </div>
       <div class="main col-xs-8">
         <h2>How to construct the heap</h2>
@@ -48,95 +55,7 @@
 
     </div>
     <script src='d3.min.js'></script>
-    <script>
-    var data;
-      var superscript = "⁰¹²³⁴⁵⁶⁷⁸⁹",
-          formatPower = function(d) { return (d + "").split("").map(function(c) { return superscript[c]; }).join(""); };
 
-      var margin = {top: 40.5, right: 40.5, bottom: 50.5, left: 60.5},
-          width = 960 - margin.left - margin.right,
-          height = 500 - margin.top - margin.bottom;
-
-      var x = d3.scale.linear()
-          .domain([0, 100])
-          .range([0, width]);
-
-      var y = d3.scale.log()
-          .base(Math.E)
-          .domain([Math.exp(0), Math.exp(9)])
-          .range([height, 0]);
-
-      var xAxis = d3.svg.axis()
-          .scale(x)
-          .orient("bottom");
-
-      var yAxis = d3.svg.axis()
-          .scale(y)
-          .orient("left")
-          .tickFormat(function(d) { return "e" + formatPower(Math.round(Math.log(d))); });
-
-      var line = d3.svg.line()
-          .x(function(d) { return x(d[0]); })
-          .y(function(d) { return y(d[1]); });
-
-      var svg = d3.select(".time").append("svg")
-          .attr("width", width + margin.left + margin.right)
-          .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-          .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-      svg.append("g")
-          .attr("class", "axis axis--y")
-          .attr("transform", "translate(-10,0)")
-          .call(yAxis);
-
-      svg.append("g")
-          .attr("class", "axis axis--x")
-          .attr("transform", "translate(0," + (height + 10) + ")")
-          .call(xAxis);
-
-      data = d3.range(100).map(function(x) { return [x, x * x + x + 1]; });
-      svg.append("path")
-          .datum(data)
-          .attr("class", "line")
-          .attr("d", line);
-
-      function getvalue(){
-        var value = document.getElementById("range").value;
-        var x = d3.scale.linear()
-            .domain([0, 100])
-            .range([0, width]);
-
-        var xAxis = d3.svg.axis()
-            .scale(x)
-            .orient("bottom");
-
-        var yAxis = d3.svg.axis()
-            .scale(y)
-            .orient("left")
-            .tickFormat(function(d) { return "e" + formatPower(Math.round(Math.log(d))); });
-
-        var line = d3.svg.line()
-            .x(function(d) { console.log("x",d[0]);return x(d[0]); })
-            .y(function(d) { return y(d[1]); });
-
-        var svg = d3.select(".time").transition()
-        data = d3.range(20).map(function(x) { return [x, x * x + x + 1]; });
-
-        svg.select(".axis axis--y")
-            .call(yAxis);
-
-        svg.select(".axis axis--x")
-            .call(xAxis);
-
-        svg.select("path")
-            .datum(data)
-            .enter()
-            .attr("d", line);
-
-      }
-
-    </script>
     <script>
       function stop(){
         var stopevent = d3.select(".main");
@@ -151,9 +70,6 @@
       function resume(){
         animateSwap();
       }
-
-
-
 
       var MaxtreeData = [
           {
@@ -268,18 +184,14 @@
 
       function updateMaxheap(source) {
 
-        // Compute the new tree layout.
         var nodes = tree.nodes(source),
       	  links = tree.links(nodes);
 
-        // Normalize for fixed-depth.
         nodes.forEach(function(d) { d.y = d.depth * 100; });
 
-        // Declare the nodes…
         var node = svg1.selectAll("g.node")
       	  .data(nodes, function(d) { return d.id || (d.id = ++i); });
 
-        // Enter the nodes.
         var nodeEnter = node.enter().append("g")
          .attr("class", "node")
          .attr("transform", function(d) {
@@ -299,11 +211,9 @@
       	  .style("fill-opacity", 1)
           .style("font-size","20px");
 
-        // Declare the links…
         var link = svg1.selectAll("path.link")
       	  .data(links, function(d) { return d.target.id; });
 
-        // Enter the links.
         link.enter().insert("path", "g")
       	  .attr("class", "link")
         	  .style("stroke", "black")
@@ -313,18 +223,14 @@
 
       function updateMinheap(source) {
 
-        // Compute the new tree layout.
         var nodes = tree.nodes(source),
       	  links = tree.links(nodes);
 
-        // Normalize for fixed-depth.
         nodes.forEach(function(d) { d.y = d.depth * 100; });
 
-        // Declare the nodes…
         var node = svg2.selectAll("g.node")
       	  .data(nodes, function(d) { return d.id || (d.id = ++i); });
 
-        // Enter the nodes.
         var nodeEnter = node.enter().append("g")
          .attr("class", "node")
          .attr("transform", function(d) {
@@ -344,11 +250,9 @@
       	  .style("fill-opacity", 1)
           .style("font-size","20px");
 
-        // Declare the links…
         var link = svg2.selectAll("path.link")
       	  .data(links, function(d) { return d.target.id; });
 
-        // Enter the links.
         link.enter().insert("path", "g")
       	  .attr("class", "link")
         	  .style("stroke", "black")

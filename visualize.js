@@ -44,8 +44,6 @@ var restoreInitial = function() {
   node = initialNode;
 };
 
-
-// Update the array of nodes for the d3 tree layout based on adding nodes during Heap methods
 var insertNode = function(value) {
   var currentid;
   if (nodes[0].value === undefined) {
@@ -71,7 +69,7 @@ var insertNode = function(value) {
 
   // Add entering nodes in the parent’s old position.
   nodeEnter.append("circle")
-      .attr("r", 20)
+      .attr("r", 30)
       .attr("cx", function(d) { return d.parent.px; })
       .attr("cy", function(d) { return d.parent.py; });
 
@@ -107,7 +105,7 @@ var insertNode = function(value) {
       .attr("cy", function(d) { return d.py = d.y; });
 
   t.selectAll("text")
-      .attr("x", function(d) { return d.px = d.x; })
+      .attr("x", function(d) { return d.px = d.x-10; })
       .attr("y", function(d) { return d.py = d.y; });
 };
 
@@ -266,7 +264,11 @@ var animateSwap = function() {
       .attr("cx", function(d) { return d.px = d.x; })
       .attr("cy", function(d) { return d.py = d.y; });
 
+  t.select('.currentinput')
+      .attr('class','comparenode');
+
   t.selectAll("text")
-      .attr("x", function(d) { return d.px = d.x; })
+      .attr("x", function(d) { return d.px = d.x-10; })
       .attr("y", function(d) { return d.py = d.y; });
+
 };

@@ -1,8 +1,6 @@
-// Heap visualization
 
 'use strict';
 
-// Set animation delay time
 var stepDelay = 3000;
 var setDelay = function() {
   stepDelay = parseInt(document.getElementById('delayTime').value);
@@ -10,12 +8,10 @@ var setDelay = function() {
   duration = 0.75*stepDelay;
 }
 
-// Create Heap constructor
 var Heap = function() {
   this.storage = [];
 };
 
-// Heap insertion method on prototype
 Heap.prototype.insert = function(value) {
 
   // Grab value from form if not provided
@@ -34,6 +30,7 @@ Heap.prototype.insert = function(value) {
 
   // Recursive function to handle swaps, input index
   var reheapify = function(index) { //being called in the setTimeout function
+    console.log("Reheapify");
     // Get parent index
     var parentInd = Math.ceil(index/2-1);
     // Base Case : value < parent or parent is null
