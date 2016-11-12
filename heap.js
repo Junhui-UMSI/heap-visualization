@@ -3,7 +3,7 @@
 'use strict';
 
 // Set animation delay time
-var stepDelay = 600;
+var stepDelay = 3000;
 var setDelay = function() {
   stepDelay = parseInt(document.getElementById('delayTime').value);
   document.getElementById('delayTime').value = '';

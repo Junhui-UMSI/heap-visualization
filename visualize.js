@@ -1,7 +1,4 @@
 
-'use strict';
-
-// D3 code for tree visualization
 var width = 1000,
     height = 800;
 
@@ -234,7 +231,6 @@ var swapRoot = function() {
   newRoot.px = newRoot.x;
   newRoot.py = newRoot.y;
 
-  // Animate
   animateSwap();
 };
 

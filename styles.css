@@ -35,6 +35,11 @@ body{
   stroke: black;
   stroke-width: 2px;
 }
+.line {
+  fill: none;
+  stroke: black;
+  stroke-width: 2px;
+}
 .nondisplay{
   display: none;
 }
@@ -43,4 +48,18 @@ body{
 }
 .heapbox{
   border: 1px solid;
+}
+.axis--x text {
+  font: 10px sans-serif;
+}
+
+.axis--y text {
+  font: oblique 15px Georgia, serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
 }
